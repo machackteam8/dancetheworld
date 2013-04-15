@@ -1,0 +1,67 @@
+﻿@{
+    ViewBag.Title = "DANCE THE WORLD";
+}
+
+@section scripts
+{
+    <script type="text/javascript" src="https://www.google.com/jsapi"> </script>
+    <script type="text/javascript">
+        var ge;
+        google.load("earth", "1");
+
+        function init() {
+            google.earth.createInstance('map3d', initCB, failureCB);
+        }
+        function initCB(instance) {
+            ge = instance;
+            ge.getWindow().setVisibility(true);
+            ge.getNavigationControl().setVisibility(ge.VISIBILITY_AUTO);
+            ge.getLayerRoot().enableLayerById(ge.LAYER_BORDERS, true);
+
+            // Add placemarks
+            var myObject = '@(Html.Raw(Model.SongsMarkers))';
+            myObject = eval('(' + myObject + ')');
+            for (var i = 0; i < myObject.length; i++) {
+                // create a point geometry
+                var lookAt = ge.getView().copyAsLookAt(ge.ALTITUDE_RELATIVE_TO_GROUND);
+                var point = ge.createPoint('');
+                point.setLatitude(myObject[i].Latitude);
+                point.setLongitude(myObject[i].Longitude);
+
+                // create icon style for the placemark based on weight
+                var icon = ge.createIcon('');
+                if (myObject[i].Weight == 1) {
+                    icon.setHref('http://dancetheworld.azurewebsites.net/images/1.red.png');
+                } else if (myObject[i].Weight == 2) {
+                    icon.setHref('http://dancetheworld.azurewebsites.net/images/2.orange.png');
+                } else if (myObject[i].Weight == 3) {
+                    icon.setHref('http://dancetheworld.azurewebsites.net/images/3.yellow.png');
+                } else if (myObject[i].Weight == 4) {
+                    icon.setHref('http://dancetheworld.azurewebsites.net/images/4.green2.png');
+                } else {
+                    icon.setHref('http://dancetheworld.azurewebsites.net/images/5.green.png');
+                }
+                var style = ge.createStyle('');
+                style.getIconStyle().setIcon(icon);
+                style.getIconStyle().setScale(5.0);
+
+                // create the point placemark and add it to Earth
+                var pointPlacemark = ge.createPlacemark('');
+                pointPlacemark.setGeometry(point);
+                pointPlacemark.setStyleSelector(style);
+                ge.getFeatures().appendChild(pointPlacemark);
+                window.placemark = pointPlacemark;
+                window.placemark.setDescription(myObject[i].Size + " songs!");
+                // create the balloon and show it in Earth  
+                var balloon = ge.createFeatureBalloon('');
+                balloon.setFeature(window.placemark);
+                balloon.setMaxWidth(300);
+                ge.setBalloon(null);
+            }
+        }
+        function failureCB(errorCode) {
+        }
+        google.setOnLoadCallback(init);
+    </script>
+}
+<div id="map3d" ></div>

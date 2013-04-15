@@ -1,0 +1,80 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>@ViewBag.Title</title>
+    @*Styles.Render("~/Content/css")*@
+    @*@Scripts.Render("~/bundles/jquery")*@
+
+    <script src="~/scripts/libs/jquery.min.js"></script>
+    <script src="~/scripts/libs/kendo.web.min.js"></script>
+    <script src="~/scripts/libs/knockout-2.2.1.js"></script>
+    <script src="~/scripts/libs/knockout-kendo.min.js"></script>
+
+    <link href="~/styles/style.css" rel="stylesheet" />
+    <link href="~/styles/libs/kendo.common.min.css" rel="stylesheet" />
+    <link href="~/styles/libs/kendo.default.min.css" rel="stylesheet" />
+
+    <link href="~/styles/libs/kendo.bootstrap.min.css" rel="stylesheet" />
+
+    <script type="text/javascript">
+        var viewModel;
+        var loadKnockout = function () {
+            viewModel = new ViewModel();
+            ko.applyBindings(viewModel);       
+        }
+        function applyButtonClick() {
+            window.location = '/?startYear=' + viewModel.myValues()[0] + '&endYear=' + viewModel.myValues()[1];
+        }
+        var ViewModel = function () {
+            var self = this;
+            this.min = 1920;
+            this.max = 2013;
+            var start = this.min;
+            var end = this.max;
+            if (window.location.search) {
+                var params = window.location.search.slice(1).split("&");
+                start = parseInt(params[0].split("=")[1], 10);
+                end = parseInt(params[1].split("=")[1], 10);
+            }
+            this.myValues = ko.observableArray([start, end]);
+            this.checkBoxValue = ko.observable(true);
+            this.checkBoxValue.subscribe(function (value) {
+                ge.getLayerRoot().enableLayerById(ge.LAYER_BORDERS, value);
+            });
+        };
+    </script>
+    @RenderSection("scripts", false)
+</head>
+<body onload="loadKnockout()">
+    <div>
+        <div id="header">
+           <img src ="../images/dance-the-world-header.png" style =" float: left;" />
+        </div>    
+        <div id="body">         
+            <div id="content">    
+                <div id = "rangeControll" style ="margin-left: 50px; margin-top: 20px; width: 500px;"
+                     <div data-bind="kendoRangeSlider: {
+    values: myValues, min: min, max: max, tickPlacement: 'none'
+}"  style =" width: 500px; float: left; " id ="rangeslider">
+                            <input /><input />
+                    </div>
+                    <div id ="yearSelected">
+                        <strong data-bind="text: myValues()[0]"> </strong> - 
+                        <strong data-bind="text: myValues()[1]"> </strong> 
+                    </div>
+                    <button style ="margin-top: 28px;" class ="k-button" data-bind="click: applyButtonClick" >  Apply  </button>
+                    <img src ="../images/dance-the-world-2.png" style =" float: right;"  width ="360" height="90" id ="legend"/>
+                    <div  style ="float: right; margin-top: 17px !important; margin-right:20px;">            
+                         <input type="checkbox" data-bind="checked: checkBoxValue" style ="float:left; margin-top: 20px !important;" />   
+                        <p style =" color: white; float:right; margin-right: 5px;" >Show Countries</p>
+                    </div>
+                </div>  
+                   @RenderBody()  
+             </div>                        
+        </div>
+        </div>
+</body>
+</html>
+
+

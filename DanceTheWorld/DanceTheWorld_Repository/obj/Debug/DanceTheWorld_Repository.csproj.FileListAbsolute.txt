@@ -1,0 +1,7 @@
+D:\Projects\mhack\mac-mackhack13team8\DanceTheWorld\DanceTheWorld_Repository\bin\Debug\DanceTheWorld_Repository.dll
+D:\Projects\mhack\mac-mackhack13team8\DanceTheWorld\DanceTheWorld_Repository\bin\Debug\DanceTheWorld_Repository.pdb
+D:\Projects\mhack\mac-mackhack13team8\DanceTheWorld\DanceTheWorld_Repository\bin\Debug\DanceTheWorld_Data.dll
+D:\Projects\mhack\mac-mackhack13team8\DanceTheWorld\DanceTheWorld_Repository\bin\Debug\DanceTheWorld_Data.pdb
+D:\Projects\mhack\mac-mackhack13team8\DanceTheWorld\DanceTheWorld_Repository\obj\Debug\DanceTheWorld_Repository.csprojResolveAssemblyReference.cache
+D:\Projects\mhack\mac-mackhack13team8\DanceTheWorld\DanceTheWorld_Repository\obj\Debug\DanceTheWorld_Repository.dll
+D:\Projects\mhack\mac-mackhack13team8\DanceTheWorld\DanceTheWorld_Repository\obj\Debug\DanceTheWorld_Repository.pdb

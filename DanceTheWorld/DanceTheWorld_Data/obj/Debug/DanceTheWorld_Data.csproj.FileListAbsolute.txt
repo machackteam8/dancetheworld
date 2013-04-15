@@ -1,0 +1,4 @@
+D:\Projects\mhack\mac-mackhack13team8\DanceTheWorld\DanceTheWorld_Data\bin\Debug\DanceTheWorld_Data.dll
+D:\Projects\mhack\mac-mackhack13team8\DanceTheWorld\DanceTheWorld_Data\bin\Debug\DanceTheWorld_Data.pdb
+D:\Projects\mhack\mac-mackhack13team8\DanceTheWorld\DanceTheWorld_Data\obj\Debug\DanceTheWorld_Data.dll
+D:\Projects\mhack\mac-mackhack13team8\DanceTheWorld\DanceTheWorld_Data\obj\Debug\DanceTheWorld_Data.pdb
